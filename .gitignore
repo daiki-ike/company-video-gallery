@@ -1,0 +1,20 @@
+# Python
+*.pyc
+__pycache__/
+server.py
+
+# 設定ファイル
+config.js
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log

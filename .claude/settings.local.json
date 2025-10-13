@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"c:\\Users\\daiki\\Desktop\\テスト\\index.html\")",
+      "Bash(dir:*)",
+      "Bash(echo:*)",
+      "Bash(python:*)",
+      "Bash(start http://localhost:8000/index.html)",
+      "Bash(curl http://localhost:8000/get-videos.php)",
+      "Bash(curl:*)",
+      "Bash(copy:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会社動画ギャラリー</title>
+
+    <!-- OGP設定（SNSシェア用） -->
+    <meta property="og:title" content="会社動画ギャラリー">
+    <meta property="og:description" content="気に入った動画には何回でも「いいね」OK。いいね数でランキングが決まり、上位作品は会社の採用動画として発信されます。">
+    <meta property="og:image" content="http://192.168.1.5:8000/images/thumbnail.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="http://192.168.1.5:8000/index.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="会社動画ギャラリー">
+    <meta name="twitter:description" content="気に入った動画には何回でも「いいね」OK。いいね数でランキングが決まり、上位作品は会社の採用動画として発信されます。">
+    <meta name="twitter:image" content="http://192.168.1.5:8000/images/thumbnail.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/thumbnail.png">
+    <link rel="apple-touch-icon" href="images/thumbnail.png">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>会社動画ギャラリー</h1>
+    </header>
+
+    <main>
+        <!-- 説明文 -->
+        <div class="description-banner">
+            <p>気に入った動画には何回でも「いいね」OK。</p>
+            <p>いいね数でランキングが決まり、上位作品は会社の採用動画として発信されます。</p>
+        </div>
+
+        <!-- カテゴリータブ -->
+        <div class="category-tabs">
+            <button class="tab-button active" data-category="category1">プロモーションムービー</button>
+            <button class="tab-button" data-category="category2">採用CM</button>
+            <button class="tab-button" data-category="category3">仕事イメージ</button>
+            <button class="tab-button" data-category="category4">アルバイトCM</button>
+        </div>
+
+        <!-- 動画グリッド -->
+        <div class="video-grid" id="videoGrid">
+            <!-- 動画カードがJavaScriptで動的に生成されます -->
+        </div>
+
+        <!-- リセットボタン（管理者用） -->
+        <div class="admin-section">
+            <button class="reset-button" id="resetButton">いいねをリセット</button>
+        </div>
+
+        <!-- 動画モーダル -->
+        <div class="modal" id="videoModal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <div class="video-container">
+                    <video id="modalVideo" controls></video>
+                </div>
+                <button class="like-button" id="likeButton">
+                    <span class="heart">♡</span>
+                    <span class="like-text">いいね</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
