@@ -162,10 +162,12 @@ function createVideoCard(video, index) {
     const aspectRatio = getAspectRatioClass(video);
     card.classList.add(aspectRatio);
 
-    // サムネイル画像または動画プレビュー（軽量プレビュー対応）
+    // サムネイル画像または動画プレビュー（遅延読み込み対応）
+    // URLをエンコード（スペースなどの特殊文字に対応）
+    const encodedUrl = video.url.split('/').map(encodeURIComponent).join('/');
     const thumbnailHTML = video.thumbnail
         ? `<img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">`
-        : `<video class="video-thumbnail" src="${video.url}#t=${video.thumbnailTime || 2}" preload="metadata" muted loop></video>`;
+        : `<video class="video-thumbnail" data-src="${encodedUrl}#t=${video.thumbnailTime || 2}" preload="none" muted loop></video>`;
 
     // 現在のいいね数を取得
     const currentLikes = getLikes(video.url);
@@ -200,36 +202,63 @@ function createVideoCard(video, index) {
 
     const videoElement = card.querySelector('video');
 
-    // サムネイルが動画の場合の処理（軽量プレビュー対応）
+    // サムネイルが動画の場合の処理（遅延読み込み対応）
     if (videoElement) {
-        // メタデータ読み込み後の処理
-        videoElement.addEventListener('loadedmetadata', function() {
-            // アスペクト比を自動検出
-            if (!video.aspectRatio) {
-                const detectedAspectRatio = detectAspectRatioFromVideo(this);
-                card.classList.remove('aspect-9-16', 'aspect-16-9');
-                card.classList.add(detectedAspectRatio);
-            }
+        // Intersection Observerで遅延読み込み
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 画面に表示されたら動画を読み込む
+                    const video = entry.target;
+                    const videoSrc = video.getAttribute('data-src');
 
-            // 指定された時間にシーク
-            if (video.thumbnailTime) {
-                this.currentTime = video.thumbnailTime;
-            } else {
-                this.currentTime = 2; // デフォルトは2秒
-            }
+                    if (videoSrc && !video.src) {
+                        video.src = videoSrc;
+                        video.preload = 'metadata';
+
+                        // メタデータ読み込み後の処理
+                        video.addEventListener('loadedmetadata', function() {
+                            // アスペクト比を自動検出
+                            if (!video.aspectRatio) {
+                                const detectedAspectRatio = detectAspectRatioFromVideo(this);
+                                card.classList.remove('aspect-9-16', 'aspect-16-9');
+                                card.classList.add(detectedAspectRatio);
+                            }
+
+                            // 指定された時間にシーク
+                            if (video.thumbnailTime) {
+                                this.currentTime = video.thumbnailTime;
+                            } else {
+                                this.currentTime = 2; // デフォルトは2秒
+                            }
+                        });
+                    }
+
+                    // 一度読み込んだら監視を解除
+                    observer.unobserve(video);
+                }
+            });
+        }, {
+            rootMargin: '50px' // 画面の50px手前から読み込み開始
         });
+
+        observer.observe(videoElement);
 
         // ホバーで動画をプレビュー再生
         card.addEventListener('mouseenter', function() {
-            videoElement.play().catch(err => {
-                console.log('自動再生エラー:', err);
-            });
+            if (videoElement.src) {
+                videoElement.play().catch(err => {
+                    console.log('自動再生エラー:', err);
+                });
+            }
         });
 
         card.addEventListener('mouseleave', function() {
-            videoElement.pause();
-            const seekTime = video.thumbnailTime || 2;
-            videoElement.currentTime = seekTime;
+            if (videoElement.src) {
+                videoElement.pause();
+                const seekTime = video.thumbnailTime || 2;
+                videoElement.currentTime = seekTime;
+            }
         });
     }
 
@@ -301,7 +330,9 @@ function openVideoModal(video) {
 
     // モーダルの内容を設定
     modalTitle.textContent = video.title;
-    modalVideo.src = video.url;
+    // URLをエンコード（スペースなどの特殊文字に対応）
+    const encodedUrl = video.url.split('/').map(encodeURIComponent).join('/');
+    modalVideo.src = encodedUrl;
 
     // アスペクト比に応じたクラスを追加
     const aspectRatio = getAspectRatioClass(video);
