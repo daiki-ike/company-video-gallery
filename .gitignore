@@ -3,9 +3,6 @@
 __pycache__/
 server.py
 
-# 設定ファイル
-config.js
-
 # macOS
 .DS_Store
 
