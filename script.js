@@ -162,10 +162,10 @@ function createVideoCard(video, index) {
     const aspectRatio = getAspectRatioClass(video);
     card.classList.add(aspectRatio);
 
-    // サムネイル画像または動画プレビュー
+    // サムネイル画像または動画プレビュー（軽量プレビュー対応）
     const thumbnailHTML = video.thumbnail
         ? `<img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">`
-        : `<video class="video-thumbnail" src="${video.url}#t=${video.thumbnailTime || 0}" preload="metadata" muted loop></video>`;
+        : `<video class="video-thumbnail" src="${video.url}#t=${video.thumbnailTime || 2}" preload="metadata" muted loop></video>`;
 
     // 現在のいいね数を取得
     const currentLikes = getLikes(video.url);
@@ -200,7 +200,7 @@ function createVideoCard(video, index) {
 
     const videoElement = card.querySelector('video');
 
-    // サムネイルが動画の場合の処理
+    // サムネイルが動画の場合の処理（軽量プレビュー対応）
     if (videoElement) {
         // メタデータ読み込み後の処理
         videoElement.addEventListener('loadedmetadata', function() {
@@ -214,6 +214,8 @@ function createVideoCard(video, index) {
             // 指定された時間にシーク
             if (video.thumbnailTime) {
                 this.currentTime = video.thumbnailTime;
+            } else {
+                this.currentTime = 2; // デフォルトは2秒
             }
         });
 
@@ -226,9 +228,8 @@ function createVideoCard(video, index) {
 
         card.addEventListener('mouseleave', function() {
             videoElement.pause();
-            if (video.thumbnailTime) {
-                videoElement.currentTime = video.thumbnailTime;
-            }
+            const seekTime = video.thumbnailTime || 2;
+            videoElement.currentTime = seekTime;
         });
     }
 
