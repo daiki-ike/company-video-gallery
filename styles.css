@@ -24,6 +24,36 @@ body {
     line-height: 1.6;
 }
 
+/* リンクカード（Tsu-Box 用） */
+.link-card {
+    display: block;
+    max-width: 640px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    text-decoration: none;
+    background: var(--bg-white);
+    margin: 12px auto 1.5rem;
+    transition: transform 0.15s ease;
+}
+
+.link-card img {
+    width: 100%;
+    display: block;
+}
+
+.link-card span {
+    display: block;
+    padding: 12px 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.link-card:hover {
+    transform: translateY(-2px);
+}
+
 /* ヘッダー */
 header {
     background-color: var(--bg-white);
