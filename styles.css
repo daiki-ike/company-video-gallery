@@ -44,10 +44,11 @@ body {
 
 .link-card span {
     display: block;
-    padding: 12px 14px;
-    font-weight: 700;
+    padding: 16px 18px;
+    font-weight: 800;
     color: var(--text-dark);
     text-align: center;
+    font-size: 1.25rem;
 }
 
 .link-card:hover {
