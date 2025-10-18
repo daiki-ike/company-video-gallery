@@ -70,7 +70,8 @@ header {
     width: 100vw;               /* full viewport width */
     margin-left: calc(50% - 50vw); /* bleed out of centered layout */
     margin-right: calc(50% - 50vw);
-    height: clamp(160px, 28vw, 320px); /* responsive height */
+    aspect-ratio: 1200 / 630;   /* keep original image ratio to avoid vertical crop */
+    height: auto;
     background: #e5e7eb;
 }
 .hero-banner__img {
@@ -674,7 +675,7 @@ main {
     height: 1.25rem;
 }
 
-.link-card:hover .icon-like {
-    opacity: 1;
-    transform: translateX(0);
-}
+.link-card:hover .icon-like { opacity: 1; transform: translateX(0); }
+
+/* Always show the like icon (no hover-only fade) */
+.icon-like { opacity: 1; transform: none; }
