@@ -141,7 +141,7 @@ main {
 .category-tabs {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
 }
@@ -170,6 +170,24 @@ main {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
     color: var(--bg-white);
+}
+
+/* 繧ｫ繝・ざ繝ｪ繝ｼ隱ｬ譏・*/
+.category-description {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.04), rgba(59, 130, 246, 0.04));
+    border-left: 3px solid var(--primary-blue);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.category-description p {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 500;
 }
 
 /* 蜍慕判繧ｰ繝ｪ繝・ラ - 2蛻苓｡ｨ遉ｺ */

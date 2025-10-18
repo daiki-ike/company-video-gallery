@@ -3,6 +3,14 @@ let currentCategory = 'category1';
 let currentVideo = null;
 let videoData = window.videoData || {}; // 動画データを格納（config.jsで宣言済み、またはサーバーから取得）
 
+// カテゴリー説明
+const categoryDescriptions = {
+    'category1': '会社やイベントの魅力を伝える映像。ブランドの世界観や想いを印象的に表現。',
+    'category2': '新しい仲間を迎えるための映像。働く人の姿や社風を紹介。',
+    'category3': '実際の業務シーンを切り取った映像。仕事内容や現場の雰囲気をわかりやすく伝える。',
+    'category4': '学生やフリーター向けに、働く楽しさやチームの雰囲気を明るく描く映像。'
+};
+
 // いいね数を管理するLocalStorage
 const LIKES_STORAGE_KEY = 'videoLikes';
 
@@ -105,9 +113,18 @@ function setupCategoryTabs() {
 
             // カテゴリーを更新して動画を表示
             currentCategory = this.dataset.category;
+            updateCategoryDescription(currentCategory);
             displayVideos(currentCategory);
         });
     });
+}
+
+// カテゴリー説明を更新
+function updateCategoryDescription(category) {
+    const descriptionText = document.getElementById('categoryDescriptionText');
+    if (descriptionText && categoryDescriptions[category]) {
+        descriptionText.textContent = categoryDescriptions[category];
+    }
 }
 
 // 動画の表示
