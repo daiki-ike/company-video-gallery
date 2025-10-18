@@ -82,6 +82,11 @@ header {
     display: block;
 }
 
+/* Mobile: push focus further right so 「！」 is visible */
+@media (max-width: 480px) {
+  .hero-banner__img { object-position: 85% 50%; }
+}
+
 /* メインコンテンツ */
 main {
     max-width: 1200px;
