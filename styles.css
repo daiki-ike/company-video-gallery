@@ -85,9 +85,9 @@ header h1 {
 
 /* 繝｡繧､繝ｳ繧ｳ繝ｳ繝・Φ繝・*/
 main {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
 }
 
 /* 隱ｬ譏弱ヰ繝翫・ */
@@ -542,7 +542,7 @@ main {
     }
 
     main {
-        padding: 1rem 0.5rem;
+        padding: 1rem 1.5rem;
     }
 
     .description-banner {
