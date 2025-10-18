@@ -637,9 +637,40 @@ main {
     }
 }
 
+/* 繝輔ぅ繝ｼ繝峨ヰ繝・け繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ */
+.feedback-section {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.feedback-button {
+    display: inline-block;
+    padding: 0.875rem 2.5rem;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.feedback-button:hover {
+    background-color: var(--light-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.feedback-button:active {
+    transform: translateY(0);
+}
+
 /* 邂｡逅・・そ繧ｯ繧ｷ繝ｧ繝ｳ */
 .admin-section {
-    margin-top: 3rem;
+    margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid var(--border-color);
     text-align: center;
