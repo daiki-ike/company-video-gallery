@@ -71,7 +71,7 @@ header h1 {
 }
 
 /* Slim hero with watermark + pill */
-.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 140px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-new.png?v=1') 50% 50% / cover no-repeat; }
+.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 140px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-new.png?v=1') 50% 50% / contain no-repeat; }
 .hero-slim::before { content: none; }
 .hero-slim__inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
 .hero-slim__wm { display: none; }
@@ -79,7 +79,7 @@ header h1 {
 .hero-slim__text { color: #fff; font-weight: 900; letter-spacing: .03em; font-size: 1.35rem; transform: rotate(-4deg); transform-origin: center; text-align: center; background: transparent; }
 
 @media (min-width: 768px) {
-  .hero-slim { height: 140px; }
+  .hero-slim { height: 170px; }
   .hero-slim__text { font-size: 1.6rem; }
 }
 
@@ -646,26 +646,32 @@ main {
 
 .feedback-button {
     display: inline-block;
-    padding: 0.875rem 2.5rem;
+    padding: 0.65rem 1.75rem;
     background-color: var(--primary-blue);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 6px;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
 }
 
 .feedback-button:hover {
-    background-color: var(--light-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    background-color: #1d4ed8;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+    color: white !important;
+    text-decoration: none !important;
 }
 
 .feedback-button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
+}
+
+.feedback-button:visited {
+    color: white !important;
+    text-decoration: none !important;
 }
 
 /* 邂｡逅・・そ繧ｯ繧ｷ繝ｧ繝ｳ */
