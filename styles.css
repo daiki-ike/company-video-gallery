@@ -167,13 +167,12 @@ main {
     color: var(--bg-white);
 }
 
-/* 蜍慕判繧ｰ繝ｪ繝・ラ - responsive grid */
+/* 蜍慕判繧ｰ繝ｪ繝・ラ - 2蛻苓｡ｨ遉ｺ */
 .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     animation: fadeIn 0.5s ease-in;
-    max-width: 1200px;
 }
 
 @keyframes fadeIn {
