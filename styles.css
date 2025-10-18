@@ -71,7 +71,7 @@ header h1 {
 }
 
 /* Slim hero with watermark + pill */
-.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 170px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-new.png?v=1') 50% 50% / cover no-repeat; }
+.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 140px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-new.png?v=1') 50% 50% / cover no-repeat; }
 .hero-slim::before { content: none; }
 .hero-slim__inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
 .hero-slim__wm { display: none; }
@@ -79,7 +79,7 @@ header h1 {
 .hero-slim__text { color: #fff; font-weight: 900; letter-spacing: .03em; font-size: 1.35rem; transform: rotate(-4deg); transform-origin: center; text-align: center; background: transparent; }
 
 @media (min-width: 768px) {
-  .hero-slim { height: 180px; }
+  .hero-slim { height: 140px; }
   .hero-slim__text { font-size: 1.6rem; }
 }
 
@@ -92,45 +92,49 @@ main {
 
 /* 隱ｬ譏弱ヰ繝翫・ */
 .description-banner {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(59, 130, 246, 0.05));
-    border: 2px solid var(--primary-blue);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.08));
+    border-left: 4px solid var(--primary-blue);
     color: var(--text-dark);
-    padding: 1.5rem 2rem;
-    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
     margin-bottom: 2rem;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-    text-align: center;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+    text-align: left;
     position: relative;
-    overflow: hidden;
 }
 
-.description-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #2563eb, #3b82f6, #2563eb);
-    background-size: 200% 100%;
-    animation: gradientShift 3s ease infinite;
+.banner-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin: 0 0 1.25rem 0;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
 }
 
-@keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
+.banner-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.description-banner p {
-    font-size: 1.125rem;
+.banner-points li {
+    font-size: 1.05rem;
     line-height: 1.8;
-    margin: 0.5rem 0;
     color: var(--text-dark);
-    font-weight: 600;
+    font-weight: 500;
+    margin: 0.75rem 0;
+    padding-left: 1.75rem;
+    position: relative;
+}
+
+.banner-points li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-blue);
+    font-weight: 700;
+    font-size: 1.2rem;
 }
 
 /* 繧ｫ繝・ざ繝ｪ繝ｼ繧ｿ繝・*/
@@ -466,12 +470,16 @@ main {
     }
 
     .description-banner {
-        padding: 1.25rem 1.5rem;
+        padding: 1.5rem 1.75rem;
         margin-bottom: 1.5rem;
     }
 
-    .description-banner p {
-        font-size: 1rem;
+    .banner-title {
+        font-size: 1.25rem;
+    }
+
+    .banner-points li {
+        font-size: 0.95rem;
     }
 
     .rank-badge {
@@ -546,13 +554,16 @@ main {
     }
 
     .description-banner {
-        padding: 1rem 1.25rem;
+        padding: 1.25rem 1.5rem;
         margin-bottom: 1.25rem;
     }
 
-    .description-banner p {
+    .banner-title {
+        font-size: 1.1rem;
+    }
+
+    .banner-points li {
         font-size: 0.9rem;
-        line-height: 1.6;
     }
 
     .rank-badge {
