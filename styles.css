@@ -71,7 +71,7 @@ header h1 {
 }
 
 /* Slim hero with watermark + pill */
-.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 140px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-new.png?v=1') 50% 50% / contain no-repeat; }
+.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 170px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-new.png?v=1') 50% 50% / cover no-repeat; }
 .hero-slim::before { content: none; }
 .hero-slim__inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
 .hero-slim__wm { display: none; }
@@ -79,15 +79,15 @@ header h1 {
 .hero-slim__text { color: #fff; font-weight: 900; letter-spacing: .03em; font-size: 1.35rem; transform: rotate(-4deg); transform-origin: center; text-align: center; background: transparent; }
 
 @media (min-width: 768px) {
-  .hero-slim { height: 170px; }
+  .hero-slim { height: 180px; }
   .hero-slim__text { font-size: 1.6rem; }
 }
 
 /* 繝｡繧､繝ｳ繧ｳ繝ｳ繝・Φ繝・*/
 main {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 3rem;
+    padding: 2rem 1rem;
 }
 
 /* 隱ｬ譏弱ヰ繝翫・ */
