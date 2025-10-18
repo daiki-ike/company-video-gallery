@@ -26,34 +26,29 @@ body {
 
 /* リンクカード（Tsu-Box 用） */
 .link-card {
-    display: block;
-    max-width: 640px;
+    display: inline-block;
     border-radius: 12px;
     box-shadow: var(--shadow-lg);
-    overflow: hidden;
     text-decoration: none;
-    background: var(--bg-white);
+    background: var(--primary-blue);
     margin: 12px auto 1.5rem;
-    transition: transform 0.15s ease;
+    padding: 12px 24px;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    color: #fff;
 }
 
-.link-card img {
-    width: 100%;
-    display: block;
-}
+.link-card img { display: none; }
 
 .link-card span {
-    display: block;
-    padding: 16px 18px;
-    font-weight: 800;
-    color: var(--text-dark);
+    display: inline-block;
+    font-weight: 700;
+    color: #fff;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
 }
 
-.link-card:hover {
-    transform: translateY(-2px);
-}
+.link-card:hover { transform: translateY(-2px); filter: brightness(1.05); }
 
 /* ヘッダー */
 header {
