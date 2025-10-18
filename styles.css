@@ -42,6 +42,9 @@ body {
 
 .link-card img { display: none; }
 
+.icon-like { line-height: 1; color: #fff; }
+.icon-like svg { display: block; width: 1.25rem; height: 1.25rem; }
+
 .link-card span {
     display: inline-block;
     font-weight: 700;
