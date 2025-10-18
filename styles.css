@@ -95,7 +95,7 @@ main {
     background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.08));
     border-left: 4px solid var(--primary-blue);
     color: var(--text-dark);
-    padding: 2rem 2.5rem;
+    padding: 1.25rem 2rem;
     border-radius: 12px;
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
@@ -107,7 +107,7 @@ main {
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--primary-blue);
-    margin: 0 0 1.25rem 0;
+    margin: 0 0 0.75rem 0;
     line-height: 1.4;
     letter-spacing: 0.02em;
 }
@@ -123,7 +123,7 @@ main {
     line-height: 1.8;
     color: var(--text-dark);
     font-weight: 500;
-    margin: 0.75rem 0;
+    margin: 0.5rem 0;
     padding-left: 1.75rem;
     position: relative;
 }
@@ -646,6 +646,7 @@ main {
 }
 
 .reset-button {
+    display: none;
     padding: 0.75rem 2rem;
     background-color: #ef4444;
     color: white;
