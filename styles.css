@@ -71,7 +71,7 @@ header h1 {
 }
 
 /* Slim hero with watermark + pill */
-.hero-slim { position: relative; max-width: 1200px; height: 170px; margin: 0 auto; border-radius: 16px; overflow: hidden; background: #60a5fa url('images/banner-like-challenge.png?v=1') center/cover no-repeat; }
+.hero-slim { position: relative; max-width: 1200px; height: 170px; margin: 0 auto; border-radius: 16px; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-v2.png?v=2') center/cover no-repeat; }
 .hero-slim::before { content: none; }
 .hero-slim__inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
 .hero-slim__wm { display: none; }
