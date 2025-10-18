@@ -654,8 +654,8 @@ main {
 }
 .icon-like {
     line-height: 1;
-    opacity: 0;
-    transform: translateX(-6px);
+    opacity: 1; /* always visible */
+    transform: none;
     transition: opacity 0.18s ease, transform 0.18s ease;
     color: #fff;
 }
@@ -668,5 +668,5 @@ main {
 
 .link-card:hover .icon-like {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
 }
