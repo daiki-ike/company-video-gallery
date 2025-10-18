@@ -1,4 +1,4 @@
-/* リセットとベーススタイル */
+﻿/* 繝ｪ繧ｻ繝・ヨ縺ｨ繝吶・繧ｹ繧ｹ繧ｿ繧､繝ｫ */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +24,7 @@ body {
     line-height: 1.6;
 }
 
-/* リンクカード（Tsu-Box 用） */
+/* 繝ｪ繝ｳ繧ｯ繧ｫ繝ｼ繝会ｼ・su-Box 逕ｨ・・*/
 .link-card {
     display: flex;
     align-items: center;
@@ -56,10 +56,10 @@ body {
 
 .link-card:hover { transform: translateY(-2px); filter: brightness(1.05); }
 
-/* ヘッダー */
+/* 繝倥ャ繝繝ｼ */
 header {
     background-color: var(--bg-white);
-    padding: 0 0 1rem; /* full-bleed banner: no side padding */
+    padding: 0; /* full-bleed banner: no side padding */
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
@@ -67,11 +67,11 @@ header {
 }
 
 header h1 {
-    display: none; /* 旧見出しは非表示（アクセシビリティはhero側で確保） */
+    display: none; /* 譌ｧ隕句・縺励・髱櫁｡ｨ遉ｺ・医い繧ｯ繧ｻ繧ｷ繝薙Μ繝・ぅ縺ｯhero蛛ｴ縺ｧ遒ｺ菫晢ｼ・*/
 }
 
 /* Slim hero with watermark + pill */
-.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 170px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-v2.png?v=3') center/cover no-repeat; }
+.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 170px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-v2.png?v=3') 50% 56% / cover no-repeat; }
 .hero-slim::before { content: none; }
 .hero-slim__inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
 .hero-slim__wm { display: none; }
@@ -83,14 +83,14 @@ header h1 {
   .hero-slim__text { font-size: 1.6rem; }
 }
 
-/* メインコンテンツ */
+/* 繝｡繧､繝ｳ繧ｳ繝ｳ繝・Φ繝・*/
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
 }
 
-/* 説明バナー */
+/* 隱ｬ譏弱ヰ繝翫・ */
 .description-banner {
     background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(59, 130, 246, 0.05));
     border: 2px solid var(--primary-blue);
@@ -133,7 +133,7 @@ main {
     font-weight: 600;
 }
 
-/* カテゴリータブ */
+/* 繧ｫ繝・ざ繝ｪ繝ｼ繧ｿ繝・*/
 .category-tabs {
     display: flex;
     gap: 0.5rem;
@@ -168,7 +168,7 @@ main {
     color: var(--bg-white);
 }
 
-/* 動画グリッド - 2列表示 */
+/* 蜍慕判繧ｰ繝ｪ繝・ラ - 2蛻苓｡ｨ遉ｺ */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -187,7 +187,7 @@ main {
     }
 }
 
-/* 動画カード */
+/* 蜍慕判繧ｫ繝ｼ繝・*/
 .video-card {
     background-color: var(--bg-white);
     border-radius: 12px;
@@ -203,7 +203,7 @@ main {
     box-shadow: var(--shadow-lg);
 }
 
-/* 動画サムネイルコンテナ */
+/* 蜍慕判繧ｵ繝繝阪う繝ｫ繧ｳ繝ｳ繝・リ */
 .video-thumbnail-container {
     position: relative;
     overflow: hidden;
@@ -214,7 +214,7 @@ main {
     justify-content: center;
 }
 
-/* ランキングバッジ */
+/* 繝ｩ繝ｳ繧ｭ繝ｳ繧ｰ繝舌ャ繧ｸ */
 .rank-badge {
     position: absolute;
     top: 0.75rem;
@@ -233,7 +233,7 @@ main {
     display: block;
 }
 
-/* 再生ボタンオーバーレイ */
+/* 蜀咲函繝懊ち繝ｳ繧ｪ繝ｼ繝舌・繝ｬ繧､ */
 .play-overlay {
     position: absolute;
     top: 0;
@@ -315,7 +315,7 @@ main {
     color: var(--primary-blue);
 }
 
-/* モーダル */
+/* 繝｢繝ｼ繝繝ｫ */
 .modal {
     display: none;
     position: fixed;
@@ -403,7 +403,7 @@ main {
     object-fit: contain;
 }
 
-/* 横動画（16:9）のモーダル */
+/* 讓ｪ蜍慕判・・6:9・峨・繝｢繝ｼ繝繝ｫ */
 .modal-content.aspect-16-9 {
     max-width: 600px;
 }
@@ -413,13 +413,13 @@ main {
     max-height: 50vh;
 }
 
-/* 縦動画（9:16）のモーダル */
+/* 邵ｦ蜍慕判・・:16・峨・繝｢繝ｼ繝繝ｫ */
 .modal-content.aspect-9-16 .video-container video {
     aspect-ratio: 9 / 16;
     max-height: 60vh;
 }
 
-/* いいねボタン */
+/* 縺・＞縺ｭ繝懊ち繝ｳ */
 .like-button {
     width: 100%;
     padding: 1rem;
@@ -452,10 +452,10 @@ main {
 }
 
 .like-button.liked .heart {
-    content: '♥';
+    content: '笙･';
 }
 
-/* レスポンシブデザイン */
+/* 繝ｬ繧ｹ繝昴Φ繧ｷ繝悶ョ繧ｶ繧､繝ｳ */
 @media (max-width: 768px) {
     header h1 {
         font-size: 1.25rem;
@@ -608,7 +608,7 @@ main {
     }
 }
 
-/* 管理者セクション */
+/* 邂｡逅・・そ繧ｯ繧ｷ繝ｧ繝ｳ */
 .admin-section {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -639,7 +639,7 @@ main {
     transform: translateY(0);
 }
 
-/* ローディングアニメーション */
+/* 繝ｭ繝ｼ繝・ぅ繝ｳ繧ｰ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ */
 .loading {
     text-align: center;
     padding: 3rem;
@@ -647,19 +647,19 @@ main {
 }
 
 .loading::after {
-    content: '読み込み中...';
+    content: '隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...';
     animation: dots 1.5s infinite;
 }
 
 @keyframes dots {
     0%, 20% {
-        content: '読み込み中.';
+        content: '隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ.';
     }
     40% {
-        content: '読み込み中..';
+        content: '隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ..';
     }
     60%, 100% {
-        content: '読み込み中...';
+        content: '隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...';
     }
 }
 .icon-like {
@@ -680,3 +680,4 @@ main {
     opacity: 1;
     transform: none;
 }
+
