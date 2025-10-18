@@ -26,7 +26,8 @@ body {
 
 /* リンクカード（Tsu-Box 用） */
 .link-card {
-    display: inline-block;
+    display: block;
+    width: max-content;
     border-radius: 12px;
     box-shadow: var(--shadow-lg);
     text-decoration: none;
