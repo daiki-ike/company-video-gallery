@@ -70,17 +70,42 @@ header h1 {
     display: none; /* 譌ｧ隕句・縺励・髱櫁｡ｨ遉ｺ・医い繧ｯ繧ｻ繧ｷ繝薙Μ繝・ぅ縺ｯhero蛛ｴ縺ｧ遒ｺ菫晢ｼ・*/
 }
 
-/* Slim hero with watermark + pill */
-.hero-slim { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); height: 160px; border-radius: 0; overflow: hidden; background: #60a5fa url('images/banner-like-challenge-1920x320.png?v=3') 50% 50% / cover no-repeat; }
-.hero-slim::before { content: none; }
-.hero-slim__inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
-.hero-slim__wm { display: none; }
-.pill, .pill__l1, .pill__l2 { display: none; }
-.hero-slim__text { color: #fff; font-weight: 900; letter-spacing: .03em; font-size: 1.35rem; transform: rotate(-4deg); transform-origin: center; text-align: center; background: transparent; }
+/* Slim hero - simple blue banner */
+.hero-slim {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: 120px;
+  background: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slim__content {
+  width: 100%;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.hero-slim__title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
 
 @media (min-width: 768px) {
-  .hero-slim { height: 260px; }
-  .hero-slim__text { font-size: 1.6rem; }
+  .hero-slim {
+    height: 140px;
+  }
+
+  .hero-slim__title {
+    font-size: 2rem;
+  }
 }
 
 /* 繝｡繧､繝ｳ繧ｳ繝ｳ繝・Φ繝・*/
