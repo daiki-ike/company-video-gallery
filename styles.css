@@ -77,7 +77,7 @@ header h1 {
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   height: 120px;
-  background: #60a5fa;
+  background: #3176f4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,10 +87,12 @@ header h1 {
   width: 100%;
   text-align: center;
   padding: 0 1rem;
+  position: relative;
+  z-index: 10;
 }
 
 .hero-slim__title {
-  color: white;
+  color: #ffffff !important;
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
