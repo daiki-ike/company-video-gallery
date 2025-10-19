@@ -66,9 +66,7 @@ header {
     z-index: 100;
 }
 
-header h1 {
-    display: none; /* 譌ｧ隕句・縺励・髱櫁｡ｨ遉ｺ・医い繧ｯ繧ｻ繧ｷ繝薙Μ繝・ぅ縺ｯhero蛛ｴ縺ｧ遒ｺ菫晢ｼ・*/
-}
+/* header h1 is now visible in banner */
 
 /* Slim hero - simple blue banner */
 .hero-slim {
@@ -664,9 +662,45 @@ main {
     }
 }
 
+/* 本編チャレンジセクション */
+.main-challenge-section {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.main-challenge-button {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background-color: #000000;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.main-challenge-button:hover {
+    background-color: #333333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.main-challenge-button:active {
+    transform: scale(0.98);
+}
+
+.main-challenge-button:visited {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
 /* 繝輔ぅ繝ｼ繝峨ヰ繝・け繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ */
 .feedback-section {
-    margin-top: 3rem;
+    margin-top: 2rem;
     padding: 2rem 0;
     text-align: center;
 }
