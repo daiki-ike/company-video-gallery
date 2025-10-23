@@ -43,6 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
 async function initializeApp() {
     setupCategoryTabs();
     await loadVideoData(); // 動画データを読み込み
+
+    // いいねデータの読み込みを待つ（likes-override.jsで定義）
+    if (typeof fetchLikesFromGist === 'function') {
+        try {
+            await fetchLikesFromGist();
+        } catch (e) {
+            console.warn('いいねデータの初期読込に失敗:', e);
+        }
+    }
+
     displayVideos(currentCategory);
     setupModal();
 }

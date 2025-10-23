@@ -108,11 +108,4 @@ function getAllLikes() {
   return likesCache;
 }
 
-// Initialize: fetch likes data on page load
-(async function() {
-  try {
-    likesCache = await fetchLikesFromGist();
-  } catch (e) {
-    console.error('初期いいねデータの取得に失敗:', e);
-  }
-})();
+// Initialize: fetch likes data on page load (removed - now handled by script.js initializeApp)
