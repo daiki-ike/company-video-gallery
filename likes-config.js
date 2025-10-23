@@ -4,4 +4,4 @@
 
 window.LIKES_API_URL = 'https://video-likes.jashidaiki.workers.dev/likes';
 // Optional admin token for reset/bulk operations (set in Worker env ADMIN_TOKEN)
-// window.ADMIN_TOKEN = '';
+window.ADMIN_TOKEN = 'mitsuki';
