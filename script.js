@@ -37,6 +37,16 @@ function getAllLikes() {
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
     setupResetButton();
+    setupSecretKeyCombo();
+
+    // テスト用: リセットボタンを即座に表示（後で削除してください）
+    setTimeout(() => {
+        const resetButton = document.getElementById('resetButton');
+        if (resetButton) {
+            resetButton.classList.add('visible');
+            console.log('🔧 テストモード: リセットボタンを表示しました');
+        }
+    }, 1000);
 });
 
 // アプリの初期化
@@ -443,12 +453,68 @@ function handleLike(video) {
     }
 }
 
+// 隠しキーコンボのセットアップ（"tsubox69"とタイピング）
+function setupSecretKeyCombo() {
+    let typedKeys = '';
+    let lastKeyTime = 0;
+    const secretCode = 'tsubox69';
+    const timeWindow = 5000; // 5秒以内にタイピングする必要がある
+
+    console.log('✅ 隠しキー機能を初期化しました。"tsubox69"とタイピングしてください。');
+
+    document.addEventListener('keydown', function(e) {
+        // 入力フィールドにフォーカスがある場合はスキップ
+        const target = e.target;
+        if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+            return;
+        }
+
+        const currentTime = Date.now();
+
+        // 5秒以上経過していたらリセット
+        if (currentTime - lastKeyTime > timeWindow) {
+            typedKeys = '';
+        }
+
+        lastKeyTime = currentTime;
+
+        // 入力された文字を追加（英字と数字のみ）
+        if (e.key.length === 1 && e.key.match(/[a-z0-9]/i)) {
+            typedKeys += e.key.toLowerCase();
+            console.log('入力:', e.key, '→ 現在:', typedKeys); // デバッグ用
+
+            // 秘密のコードより長くなったら古い文字を削除
+            if (typedKeys.length > secretCode.length) {
+                typedKeys = typedKeys.slice(-secretCode.length);
+            }
+
+            // 秘密のコードと一致したらボタンを表示
+            if (typedKeys === secretCode) {
+                const resetButton = document.getElementById('resetButton');
+                if (resetButton) {
+                    resetButton.classList.add('visible');
+                    console.log('🔓 管理者モードが有効になりました');
+                    alert('管理者モードが有効になりました！\nリセットボタンが表示されました。');
+
+                    // 視覚的なフィードバック（スクロール）
+                    setTimeout(() => {
+                        resetButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+
+                // タイプした文字列をリセット
+                typedKeys = '';
+            }
+        }
+    });
+}
+
 // リセットボタンのセットアップ
 function setupResetButton() {
     const resetButton = document.getElementById('resetButton');
 
     if (resetButton) {
-        resetButton.addEventListener('click', function() {
+        resetButton.addEventListener('click', async function() {
             // パスワード入力を求める
             const password = prompt('パスワードを入力してください:');
 
@@ -458,15 +524,39 @@ function setupResetButton() {
                 const confirmed = confirm('すべてのいいね数を0にリセットしますか？\nこの操作は取り消せません。');
 
                 if (confirmed) {
-                    // ローカルストレージをクリア
-                    localStorage.removeItem(LIKES_STORAGE_KEY);
+                    try {
+                        // サーバー側のデータをリセット
+                        const response = await fetch('https://video-likes.jashidaiki.workers.dev/likes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Admin-Token': '18ad4877e2276caca7fa5c71dbf1b4825fb575a36f0e997e11599a44084c49a0'
+                            },
+                            body: JSON.stringify({ action: 'reset' })
+                        });
 
-                    // 画面を更新
-                    displayVideos(currentCategory);
+                        const result = await response.json();
 
-                    // 完了メッセージ
-                    alert('いいね数をリセットしました！');
-                    console.log('✅ いいね数をリセットしました');
+                        if (result.ok) {
+                            // ローカルストレージもクリア
+                            localStorage.removeItem(LIKES_STORAGE_KEY);
+
+                            // 画面を更新
+                            displayVideos(currentCategory);
+
+                            // 完了メッセージ
+                            alert('いいね数をリセットしました！\nすべてのユーザーに反映されます。');
+                            console.log('✅ いいね数をリセットしました（サーバー側も含む）');
+
+                            // ボタンを再び非表示にする
+                            resetButton.classList.remove('visible');
+                        } else {
+                            throw new Error(result.error || 'リセットに失敗しました');
+                        }
+                    } catch (error) {
+                        console.error('❌ リセットエラー:', error);
+                        alert('リセットに失敗しました。\nエラー: ' + error.message);
+                    }
                 }
             } else if (password !== null) {
                 // パスワードが間違っている（キャンセル以外）
