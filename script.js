@@ -38,15 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
     setupResetButton();
     setupSecretKeyCombo();
-
-    // テスト用: リセットボタンを即座に表示（後で削除してください）
-    setTimeout(() => {
-        const resetButton = document.getElementById('resetButton');
-        if (resetButton) {
-            resetButton.classList.add('visible');
-            console.log('🔧 テストモード: リセットボタンを表示しました');
-        }
-    }, 1000);
 });
 
 // アプリの初期化
