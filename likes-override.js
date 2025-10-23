@@ -6,6 +6,12 @@ const LIKES_API_URL = (typeof window !== 'undefined' && window.LIKES_API_URL)
   ? window.LIKES_API_URL
   : 'likes.php';
 
+// Global cache for likes data
+let likesCache = {};
+let lastFetchTime = 0;
+let isFetchingLikes = false;
+const CACHE_DURATION = 10000; // 10 seconds
+
 async function saveLike(videoUrl) {
   try {
     const headers = { 'Content-Type': 'application/json' };
@@ -91,3 +97,22 @@ async function updateGist(likesData) {
     throw error;
   }
 }
+
+// Override getLikes to use API cache
+function getLikes(videoUrl) {
+  return likesCache[videoUrl] || 0;
+}
+
+// Override getAllLikes to use API cache
+function getAllLikes() {
+  return likesCache;
+}
+
+// Initialize: fetch likes data on page load
+(async function() {
+  try {
+    likesCache = await fetchLikesFromGist();
+  } catch (e) {
+    console.error('初期いいねデータの取得に失敗:', e);
+  }
+})();
