@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>【開発環境】もうひとつの・・・いいねチャレンジ</title>
+
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:site_name" content="もうひとつの・・・いいねチャレンジ" />
+  <meta property="og:title" content="もうひとつの・・・いいねチャレンジ" />
+  <meta property="og:description" content="気に入った動画には何回でも『いいね』OK。いいね数でランキングが決まり、上位作品は会社の採用動画として発信されます。" />
+  <meta property="og:image" content="https://daiki-ike.github.io/company-video-gallery/images/ogp-company-video-gallery.png?v=1" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://daiki-ike.github.io/company-video-gallery/index.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="もうひとつの・・・いいねチャレンジ" />
+  <meta name="twitter:description" content="気に入った動画には何回でも『いいね』OK。いいね数でランキングが決まり、上位作品は会社の採用動画として発信されます。" />
+  <meta name="twitter:image" content="https://daiki-ike.github.io/company-video-gallery/images/ogp-company-video-gallery.png?v=1" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="images/company-logo.png?v=1" />
+  <link rel="apple-touch-icon" href="images/company-logo.png?v=1" />
+
+  <!-- 開発環境用CSS -->
+  <link rel="stylesheet" href="styles-dev.css?v=1" />
+</head>
+<body>
+  <header>
+    <!-- Full-bleed rectangular banner (set by CSS background) -->
+    <div class="hero-slim" role="banner" aria-label="もうひとつの・・・ いいねチャレンジ！">
+      <div class="hero-slim__content">
+        <h1 class="hero-slim__title">【開発環境】<br>もうひとつの・・・<br>いいねチャレンジ！</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 開発環境バナー -->
+    <div class="description-banner" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.08), rgba(251, 192, 45, 0.08)); border-left: 4px solid #ff9800;">
+      <h2 class="banner-title" style="color: #ff9800;">🛠️ 開発環境モード</h2>
+      <ul class="banner-points">
+        <li>このページは開発用です。本番環境には影響しません。</li>
+        <li>UIのデザイン変更を自由にテストできます。</li>
+      </ul>
+    </div>
+
+    <!-- 説明文 -->
+    <div class="description-banner">
+      <h2 class="banner-title">あなたの「いいね」が、会社の顔になる</h2>
+      <ul class="banner-points">
+        <li>気に入った動画に何回でもいいねOK</li>
+        <li>上位作品は採用動画として配信予定？</li>
+      </ul>
+    </div>
+
+    <!-- カテゴリータブ -->
+    <div class="category-tabs">
+      <button class="tab-button active" data-category="category1">プロモーションムービー</button>
+      <button class="tab-button" data-category="category2">採用CM</button>
+      <button class="tab-button" data-category="category3">仕事イメージ</button>
+      <button class="tab-button" data-category="category4">アルバイトCM</button>
+    </div>
+
+    <!-- カテゴリー説明 -->
+    <div class="category-description" id="categoryDescription">
+      <p id="categoryDescriptionText">会社やイベントの魅力を伝える映像。ブランドの世界観や想いを印象的に表現。</p>
+    </div>
+
+    <!-- 動画グリッド -->
+    <div class="video-grid" id="videoGrid"></div>
+
+    <!-- 本編いいねチャレンジへのリンク -->
+    <div class="main-challenge-section">
+      <a href="https://daiki-ike.github.io/tsubox-event/" target="_blank" rel="noopener" class="main-challenge-button">
+        🔥本編のいいねチャレンジ ！▶
+      </a>
+    </div>
+
+    <!-- ご意見・ご要望フォーム -->
+    <div class="feedback-section">
+      <a href="https://forms.gle/y2trDYRQXDgDoFfj6" target="_blank" rel="noopener" class="feedback-button">
+        ご意見はこちら ▶
+      </a>
+    </div>
+
+    <!-- 管理：リセットボタン -->
+    <div class="admin-section">
+      <button class="reset-button" id="resetButton">いいねをリセット</button>
+    </div>
+
+    <!-- 動画モーダル -->
+    <div class="modal" id="videoModal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <div class="video-container"><video id="modalVideo" controls></video></div>
+        <button class="like-button" id="likeButton"><span class="heart">♡</span><span class="like-text">いいね</span></button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 開発環境用スクリプト -->
+  <script src="config.js"></script>
+  <script src="script-dev.js"></script>
+  <script src="likes-config.js"></script>
+  <script src="likes-override.js"></script>
+</body>
+</html>
