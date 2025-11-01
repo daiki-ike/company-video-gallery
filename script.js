@@ -55,6 +55,7 @@ async function initializeApp() {
     }
 
     displayVideos(currentCategory);
+    displayCertificates(currentCategory);
     setupModal();
 }
 
@@ -126,6 +127,7 @@ function setupCategoryTabs() {
             currentCategory = this.dataset.category;
             updateCategoryDescription(currentCategory);
             displayVideos(currentCategory);
+            displayCertificates(currentCategory);
         });
     });
 }
@@ -200,7 +202,7 @@ function createVideoCard(video, index) {
     // 現在のいいね数を取得
     const currentLikes = getLikes(video.url);
 
-    // ランキングバッジを作成（トップ3のみ、メダルのみ表示）
+    // ランキングバッジを作成
     let rankBadge = '';
     if (index === 0 && currentLikes > 0) {
         rankBadge = '<div class="rank-badge rank-1">🥇</div>';
@@ -208,6 +210,9 @@ function createVideoCard(video, index) {
         rankBadge = '<div class="rank-badge rank-2">🥈</div>';
     } else if (index === 2 && currentLikes > 0) {
         rankBadge = '<div class="rank-badge rank-3">🥉</div>';
+    } else if (index >= 3 && index <= 9 && currentLikes > 0) {
+        // 4位～10位は順位と総いいね数を表示
+        rankBadge = `<div class="rank-badge rank-other">${index + 1}位 (${currentLikes})</div>`;
     }
 
     card.innerHTML = `
@@ -356,6 +361,12 @@ function openVideoModal(video) {
     const modalVideo = document.getElementById('modalVideo');
     const likeButton = document.getElementById('likeButton');
 
+    // トップ3の動画かどうか判定して紙吹雪を表示
+    const rank = getVideoRank(video);
+    if (rank >= 1 && rank <= 3) {
+        fireConfetti(rank);
+    }
+
     // モーダルの内容を設定
     modalTitle.textContent = video.title;
     // URLをエンコード（スペースなどの特殊文字に対応）
@@ -440,7 +451,80 @@ function handleLike(video) {
         // 表示を更新（他のカードのいいね数も更新）
         setTimeout(() => {
             displayVideos(currentCategory);
+            displayCertificates(currentCategory);
         }, 2000);
+    }
+}
+
+// 動画のランクを取得
+function getVideoRank(video) {
+    const videos = videoData[currentCategory] || [];
+
+    // いいね数でソート（降順）
+    const videosWithLikes = videos.map(v => ({
+        ...v,
+        likes: getLikes(v.url)
+    }));
+    videosWithLikes.sort((a, b) => {
+        if (b.likes !== a.likes) {
+            return b.likes - a.likes;
+        }
+        return a.title.localeCompare(b.title, 'ja', { numeric: true, sensitivity: 'base' });
+    });
+
+    // 現在の動画のランクを取得
+    const index = videosWithLikes.findIndex(v => v.url === video.url);
+    return index + 1; // 1位から始まるランク
+}
+
+// 紙吹雪を発射
+function fireConfetti(rank) {
+    if (typeof confetti === 'undefined') {
+        console.warn('紙吹雪ライブラリが読み込まれていません');
+        return;
+    }
+
+    // ランクに応じた紙吹雪の設定
+    const configs = {
+        1: { // 1位：豪華な金色の紙吹雪
+            particleCount: 150,
+            spread: 100,
+            origin: { y: 0.6 },
+            colors: ['#FFD700', '#FFA500', '#FFFF00']
+        },
+        2: { // 2位：銀色の紙吹雪
+            particleCount: 120,
+            spread: 90,
+            origin: { y: 0.6 },
+            colors: ['#C0C0C0', '#D3D3D3', '#E8E8E8']
+        },
+        3: { // 3位：銅色の紙吹雪
+            particleCount: 100,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#CD7F32', '#B87333', '#E6A85C']
+        }
+    };
+
+    const config = configs[rank] || configs[3];
+
+    // 紙吹雪を発射
+    confetti(config);
+
+    // 追加の紙吹雪を左右から発射（1位のみ）
+    if (rank === 1) {
+        setTimeout(() => {
+            confetti({
+                ...config,
+                angle: 60,
+                origin: { x: 0, y: 0.8 }
+            });
+            confetti({
+                ...config,
+                angle: 120,
+                origin: { x: 1, y: 0.8 }
+            });
+        }, 250);
     }
 }
 
@@ -500,6 +584,150 @@ function setupSecretKeyCombo() {
     });
 }
 
+// トップ3表彰状を表示
+function displayCertificates(category) {
+    const container = document.getElementById('certificateContainer');
+    if (!container) return;
+
+    const videos = videoData[category] || [];
+
+    // いいね数でソート（降順）
+    const videosWithLikes = videos.map(v => ({
+        ...v,
+        likes: getLikes(v.url)
+    }));
+    videosWithLikes.sort((a, b) => {
+        if (b.likes !== a.likes) {
+            return b.likes - a.likes;
+        }
+        return a.title.localeCompare(b.title, 'ja', { numeric: true, sensitivity: 'base' });
+    });
+
+    // トップ3のみ取得
+    const top3 = videosWithLikes.slice(0, 3).filter(v => v.likes > 0);
+
+    // コンテナをクリア
+    container.innerHTML = '';
+
+    if (top3.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-gray); padding: 2rem;">まだいいねがありません</p>';
+        return;
+    }
+
+    // 各動画の表彰状カードを作成
+    top3.forEach((video, index) => {
+        const rank = index + 1;
+        const medals = ['🥇', '🥈', '🥉'];
+        const rankNames = ['第1位', '第2位', '第3位'];
+
+        const card = document.createElement('div');
+        card.className = 'certificate-card';
+        card.innerHTML = `
+            <div class="certificate-rank">${medals[index]}</div>
+            <div class="certificate-video-title">${video.title}</div>
+            <div class="certificate-likes">いいね数: ${video.likes}</div>
+            <button class="certificate-download-btn" onclick="downloadCertificate('${video.url}', ${rank}, '${video.title.replace(/'/g, "\\'")}', ${video.likes})">
+                📥 表彰状をダウンロード
+            </button>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// 表彰状を生成してダウンロード
+function downloadCertificate(videoUrl, rank, title, likes) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 800;
+    canvas.height = 600;
+    const ctx = canvas.getContext('2d');
+
+    // 背景色（グラデーション）
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    if (rank === 1) {
+        gradient.addColorStop(0, '#FFF8DC');
+        gradient.addColorStop(1, '#FFE4B5');
+    } else if (rank === 2) {
+        gradient.addColorStop(0, '#F0F0F0');
+        gradient.addColorStop(1, '#E8E8E8');
+    } else {
+        gradient.addColorStop(0, '#FFF0E0');
+        gradient.addColorStop(1, '#FFE4CC');
+    }
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 枠線
+    ctx.strokeStyle = rank === 1 ? '#FFD700' : rank === 2 ? '#C0C0C0' : '#CD7F32';
+    ctx.lineWidth = 10;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    // 内側の枠線
+    ctx.strokeStyle = rank === 1 ? '#FFA500' : rank === 2 ? '#A8A8A8' : '#B87333';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(35, 35, canvas.width - 70, canvas.height - 70);
+
+    // タイトル
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 48px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('表彰状', canvas.width / 2, 100);
+
+    // メダル
+    const medals = ['🥇', '🥈', '🥉'];
+    ctx.font = '80px sans-serif';
+    ctx.fillText(medals[rank - 1], canvas.width / 2, 200);
+
+    // 順位
+    const rankNames = ['第1位', '第2位', '第3位'];
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillStyle = rank === 1 ? '#FFD700' : rank === 2 ? '#C0C0C0' : '#CD7F32';
+    ctx.fillText(rankNames[rank - 1], canvas.width / 2, 260);
+
+    // 動画タイトル
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 28px sans-serif';
+    // テキストを折り返す
+    const maxWidth = 700;
+    const words = title.split('');
+    let line = '';
+    let y = 330;
+    const lineHeight = 35;
+
+    for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i];
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && i > 0) {
+            ctx.fillText(line, canvas.width / 2, y);
+            line = words[i];
+            y += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line, canvas.width / 2, y);
+
+    // いいね数
+    ctx.font = '24px sans-serif';
+    ctx.fillStyle = '#666';
+    ctx.fillText(`いいね数: ${likes}`, canvas.width / 2, y + 60);
+
+    // 日付
+    const today = new Date();
+    const dateStr = `${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日`;
+    ctx.font = '20px sans-serif';
+    ctx.fillText(dateStr, canvas.width / 2, canvas.height - 80);
+
+    // ダウンロード
+    canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `表彰状_${rankNames[rank - 1]}_${title}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }, 'image/png');
+}
+
 // リセットボタンのセットアップ
 function setupResetButton() {
     const resetButton = document.getElementById('resetButton');
@@ -534,6 +762,7 @@ function setupResetButton() {
 
                             // 画面を更新
                             displayVideos(currentCategory);
+                            displayCertificates(currentCategory);
 
                             // 完了メッセージ
                             alert('いいね数をリセットしました！\nすべてのユーザーに反映されます。');

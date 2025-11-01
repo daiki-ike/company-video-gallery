@@ -215,6 +215,24 @@ main {
     font-weight: 500;
 }
 
+/* 感謝メッセージ */
+.thank-you-message {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    border-radius: 12px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.thank-you-message p {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.02em;
+}
+
 /* 蜍慕判繧ｰ繝ｪ繝・ラ - 2蛻苓｡ｨ遉ｺ */
 .video-grid {
     display: grid;
@@ -270,6 +288,17 @@ main {
     z-index: 10;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     line-height: 1;
+}
+
+/* 4位～10位のランクバッジ */
+.rank-badge.rank-other {
+    font-size: 1rem;
+    background-color: rgba(37, 99, 235, 0.9);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 700;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .video-thumbnail {
@@ -660,6 +689,79 @@ main {
     #modalTitle {
         font-size: 1rem;
     }
+}
+
+/* トップ3表彰状セクション */
+.certificate-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 165, 0, 0.05));
+    border-radius: 12px;
+    text-align: center;
+}
+
+.certificate-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.certificate-description {
+    font-size: 1rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+}
+
+.certificate-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.certificate-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.certificate-rank {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-video-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.certificate-likes {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+}
+
+.certificate-download-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.certificate-download-btn:hover {
+    background-color: var(--light-blue);
+    transform: translateY(-2px);
 }
 
 /* 本編チャレンジセクション */
